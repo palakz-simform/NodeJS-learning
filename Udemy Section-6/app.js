@@ -96,6 +96,40 @@ const deleteTour = (req, res) => {
   });
 };
 
+const createUser = (req,res) =>{
+  res.status(500).json({
+    status:'error',
+    message:'This route is not yet defined!'
+  })
+}
+
+const getUser = (req,res) =>{
+  res.status(500).json({
+    status:'error',
+    message:'This route is not yet defined!'
+  })
+}
+
+const updateUser = (req,res) =>{
+  res.status(500).json({
+    status:'error',
+    message:'This route is not yet defined!'
+  })
+}
+
+const deleteUser = (req,res) =>{
+  res.status(500).json({
+    status:'error',
+    message:'This route is not yet defined!'
+  })
+}
+
+const getAllUsers = (req,res) =>{
+  res.status(500).json({
+    status:'error',
+    message:'This route is not yet defined!'
+  })
+}
 // 3. Routes
 
 // app.get('/api/v1/tours',getAllTours)
@@ -104,7 +138,10 @@ const deleteTour = (req, res) => {
 // app.patch('/api/v1/tours/:id', updateTour)
 // app.delete('/api/v1/tours/:id',deleteTour)
 
-app.route('/api/v1/tours').get(getAllTours).post(createTour);
+app
+  .route('/api/v1/tours')
+  .get(getAllTours)
+  .post(createTour);
 
 app
   .route('/api/v1/tours/:id')
@@ -112,6 +149,16 @@ app
   .patch(updateTour)
   .delete(deleteTour);
 
+app
+  .route('/api/v1/users')
+  .get(getAllUsers)
+  .post(createUser)
+
+app
+  .route('/api/v1/users/:id')
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser)
 
 // 4. Start server
 
