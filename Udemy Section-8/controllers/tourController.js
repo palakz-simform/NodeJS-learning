@@ -15,9 +15,9 @@ exports.getAllTours = async (req, res) => {
 
     // 1B) Advanced Filtering
     let queryString = JSON.stringify(queryObj)
-    console.log('sada',queryString);
     queryString = queryString.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`)
     let query = Tour.find(JSON.parse(queryString));
+
     // 2) Sorting
     if(req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
@@ -25,6 +25,15 @@ exports.getAllTours = async (req, res) => {
     }
     else{
       query = query.sort('-createdAt')
+    }
+
+    // 3) Field limiting
+    if(req.query.fields){
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields)
+    }
+    else{
+      query = query.select('-__v');
     }
 
     // EXECUTE QUERY
