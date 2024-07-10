@@ -85,3 +85,14 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = currentUser; //We are doing this so that if we want to access the properties accross different middleware then we can store it in req object
   next();
 });
+
+exports.restrictTo = (...roles) =>{
+    return (req, res,next)=>{
+        // roles is an array ['admin' , 'lead-guide']
+        // req.user.roles we are getting from the middleware protect
+        if(!roles.includes(req.user.role)){
+            return next(new AppError('You do not have permission to perform this action', 403))
+        }
+        next()
+    }
+}
